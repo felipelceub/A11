@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class Main{
+public class Cardapio{
 	static List<String> listaNomes = new ArrayList<>();
 	static List<String> listaDescricao = new ArrayList<>();
 	static List<Boolean> listaAtivo = new ArrayList<>();
