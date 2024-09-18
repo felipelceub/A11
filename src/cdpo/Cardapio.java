@@ -3,6 +3,7 @@ package cdpo;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Cardapio{
 	static List<String> listaNomes = new ArrayList<>();
@@ -12,11 +13,16 @@ public class Cardapio{
 	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
+		Locale.setDefault(new Locale("en", "US"));
 		
 		mainMenu();
+		while(true) {
 		int op = sc.nextInt();
 		mainMenuSelections(op, sc);
-		
+		if(op == 5) {
+			break;
+		}
+		}
 		sc.close();
 		
 	}
@@ -65,6 +71,8 @@ public class Cardapio{
 			System.out.println(listaDescricao.get(i));
 			System.out.println(listaAtivo.get(i));
 			System.out.println(listaPreco.get(i));
+			System.out.println("o index desse produto é: "+ i);
+			System.out.println("\n");
 		}
 		
 		
@@ -75,6 +83,7 @@ public class Cardapio{
 		System.out.println("Digite 2 para ver todos os produtos.");
 		System.out.println("Digite 3 para editar um produto.");
 		System.out.println("Digite 4 para remover um produto.");
+		System.out.println("Digite 5 para finalizar o processo.");
 	}
 	
 	public static void mainMenuSelections(int op, Scanner sc) {
@@ -99,10 +108,20 @@ public class Cardapio{
 			System.out.println("Digite o preco do produto: ");
 			Double price = sc.nextDouble();
 			listaPreco.add(price);
-			
+			break;
 		case 2:
 			getAllInfo();
+			break;
+		
+		case 3:
+			System.out.println("digite o index para editar o as informacoes");
+			System.out.println("digite o novo nome: ");
+			nome = sc.next();
+			sc.nextLine();
+			
 		}
+
+			
 	}
 	
 	
