@@ -3,7 +3,7 @@ package cdpo;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
+
 
 public class Cardapio{
 	static List<String> listaNomes = new ArrayList<>();
@@ -18,46 +18,13 @@ public class Cardapio{
 		while(true) {
 		int op = sc.nextInt();
 		mainMenuSelections(op, sc);
-		if(op == 5) {
+		if(op == 6) {
+			System.out.println("Operacao finalizada!");
 			break;
 		}
 		}
 		sc.close();
 		
-	}
-	
-	
-	
-	public static void cadastroNomeProduto(String produtoNome) {
-		listaNomes.add(produtoNome);
-	}
-	
-	public static void cadastroDescProduto(String produtoDesc) {
-		listaDescricao.add(produtoDesc);
-	}
-	
-	public static void cadastroAtivoProduto(Boolean produtoAtv) {
-		listaAtivo.add(produtoAtv);
-	}
-	
-	public static void cadastroPrecoProduto(Double produtoPreco) {
-		listaPreco.add(produtoPreco);
-	}
-	
-	public static void alterarNomeProduto(int i, String produtoNome) {
-		listaNomes.set(i, produtoNome);
-	}
-	
-	public static void alterarDescProduto(int i, String produtoDesc) {
-		listaNomes.set(i, produtoDesc);
-	}
-	
-	public static void alterarAtivoProduto(int i, Boolean produtoAtv) {
-		listaAtivo.set(i, produtoAtv);
-	}
-	
-	public static void alterarPrecoProduto(int i, String produtoPreco) {
-		listaNomes.set(i, produtoPreco);
 	}
 	
 	public static void getAllInfo() {
@@ -82,7 +49,8 @@ public class Cardapio{
 		System.out.println("Digite 2 para ver todos os produtos.");
 		System.out.println("Digite 3 para editar um produto.");
 		System.out.println("Digite 4 para remover um produto.");
-		System.out.println("Digite 5 para finalizar o processo.");
+		System.out.println("Digite 5 para rever o menu.");
+		System.out.println("Digite 6 para finalizar o processo.");
 	}
 	
 	public static void mainMenuSelections(int op, Scanner sc) {
@@ -98,22 +66,38 @@ public class Cardapio{
 		case 3:
 			editarProduto(sc);
 			break;
+		
+		case 4:
+			removerProduto(sc);
+			break;
+		
+		case 5:
+			mainMenu();
+			break;
+		
+		case 6:
+			break;
+		default:
+			System.out.println("digito incorreto...");
+			break;
 		}
 
 			
 	}
 	
 	public static void cadastrarProduto(Scanner sc) {
+		sc.nextLine();
 		System.out.println("Digite o nome do produto: ");
 		String nome = sc.nextLine();
-		sc.next();
+
 		listaNomes.add(nome);
 		
 		System.out.println("Digite a descricao do produto: ");
 			String descricao = sc.nextLine();
-				sc.next();
+
 			listaDescricao.add(descricao);
 		System.out.println("O produto esta disponivel? 1 para sim, 2 para nao");
+	
 			int disponibilidade = sc.nextInt();
 			if(disponibilidade == 1) {
 				listaAtivo.add(true);
@@ -128,18 +112,17 @@ public class Cardapio{
 	}
 	
 	public static void editarProduto(Scanner sc) {
+		sc.nextLine();
 		System.out.println("digite o index para editar o as informacoes");
 		int index = sc.nextInt();
-	
-	System.out.println("digite o novo nome: ");
-		String nome = sc.next();
 		sc.nextLine();
-		listaNomes.set(index, nome);
+	System.out.println("digite o novo nome: ");
+		String nome = sc.nextLine();
+			listaNomes.set(index, nome);
 	
 	System.out.println("digite a nova descricao: ");
 		String descricao = sc.nextLine();
-			sc.next();
-		listaDescricao.set(index, descricao);
+			listaDescricao.set(index, descricao);
 	
 	System.out.println("O produto esta disponivel? 1 para sim, 2 para nao");
 		int disponibilidade = sc.nextInt();
@@ -153,19 +136,17 @@ public class Cardapio{
 	System.out.println("digite o novo preco: ");
 		Double price = sc.nextDouble();
 		listaPreco.set(index, price);
+		
+	System.out.println("Item editado com sucesso! ");
 	}
 	
-	public static void removerProduto(int index) {
+	public static void removerProduto(Scanner sc) {
+		int index = sc.nextInt();
 		listaNomes.remove(index);
 		listaDescricao.remove(index);
 		listaAtivo.remove(index);
 		listaPreco.remove(index);
 		System.out.println("removido com sucesso!");
-	}
-	
-	
-}
-			
 	}
 	
 	
