@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class Cardapio{
+public class Main{
 	static List<String> listaNomes = new ArrayList<>();
 	static List<String> listaDescricao = new ArrayList<>();
 	static List<Boolean> listaAtivo = new ArrayList<>();
@@ -13,7 +13,6 @@ public class Cardapio{
 	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		Locale.setDefault(new Locale("en", "US"));
 		
 		mainMenu();
 		while(true) {
@@ -71,7 +70,7 @@ public class Cardapio{
 			System.out.println(listaDescricao.get(i));
 			System.out.println(listaAtivo.get(i));
 			System.out.println(listaPreco.get(i));
-			System.out.println("o index desse produto é: "+ i);
+			System.out.println("o index desse produto eh: "+ i);
 			System.out.println("\n");
 		}
 		
@@ -89,15 +88,32 @@ public class Cardapio{
 	public static void mainMenuSelections(int op, Scanner sc) {
 		switch(op) {
 		case 1:
-			System.out.println("Digite o nome do produto: ");
-			String nome = sc.next();
-			sc.nextLine();
-			listaNomes.add(nome);
-			System.out.println("Digite a descricao do produto: ");
-			String descricao = sc.next();
-			sc.nextLine();
+			cadastrarProduto(sc);
+			break;
+		
+		case 2:
+			getAllInfo();
+			break;
+		
+		case 3:
+			editarProduto(sc);
+			break;
+		}
+
+			
+	}
+	
+	public static void cadastrarProduto(Scanner sc) {
+		System.out.println("Digite o nome do produto: ");
+		String nome = sc.nextLine();
+		sc.next();
+		listaNomes.add(nome);
+		
+		System.out.println("Digite a descricao do produto: ");
+			String descricao = sc.nextLine();
+				sc.next();
 			listaDescricao.add(descricao);
-			System.out.println("O produto está disponivel? 1 para sim, 2 para nao");
+		System.out.println("O produto esta disponivel? 1 para sim, 2 para nao");
 			int disponibilidade = sc.nextInt();
 			if(disponibilidade == 1) {
 				listaAtivo.add(true);
@@ -105,22 +121,50 @@ public class Cardapio{
 			else {
 				listaAtivo.add(false);
 			}
-			System.out.println("Digite o preco do produto: ");
-			Double price = sc.nextDouble();
-			listaPreco.add(price);
-			break;
-		case 2:
-			getAllInfo();
-			break;
 		
-		case 3:
-			System.out.println("digite o index para editar o as informacoes");
-			System.out.println("digite o novo nome: ");
-			nome = sc.next();
-			sc.nextLine();
-			
+		System.out.println("Digite o preco do produto: ");
+		Double price = sc.nextDouble();
+		listaPreco.add(price);
+	}
+	
+	public static void editarProduto(Scanner sc) {
+		System.out.println("digite o index para editar o as informacoes");
+		int index = sc.nextInt();
+	
+	System.out.println("digite o novo nome: ");
+		String nome = sc.next();
+		sc.nextLine();
+		listaNomes.set(index, nome);
+	
+	System.out.println("digite a nova descricao: ");
+		String descricao = sc.nextLine();
+			sc.next();
+		listaDescricao.set(index, descricao);
+	
+	System.out.println("O produto esta disponivel? 1 para sim, 2 para nao");
+		int disponibilidade = sc.nextInt();
+			if(disponibilidade == 1) {
+				listaAtivo.set(index, true);
 		}
-
+			else {
+				listaAtivo.set(index, false);
+			}
+	
+	System.out.println("digite o novo preco: ");
+		Double price = sc.nextDouble();
+		listaPreco.set(index, price);
+	}
+	
+	public static void removerProduto(int index) {
+		listaNomes.remove(index);
+		listaDescricao.remove(index);
+		listaAtivo.remove(index);
+		listaPreco.remove(index);
+		System.out.println("removido com sucesso!");
+	}
+	
+	
+}
 			
 	}
 	
