@@ -22,6 +22,7 @@ public class Cardapio{
 			System.out.println("Operacao finalizada!");
 			break;
 		}
+		System.out.print("Digite a proxima operacao: ");
 		}
 		sc.close();
 		
@@ -33,12 +34,12 @@ public class Cardapio{
 			if(listaAtivo.get(i) == false) {
 				break;
 			}
-			System.out.println(listaNomes.get(i));
-			System.out.println(listaDescricao.get(i));
-			System.out.println(listaAtivo.get(i));
-			System.out.println(listaPreco.get(i));
+			System.out.println("Nome: "+ listaNomes.get(i));
+			System.out.println("Descricao do produto:\n"+ listaDescricao.get(i));
+			System.out.println("Produto disponivel?\n"+ listaAtivo.get(i));
+			System.out.printf("Preco do produto: R$%.2f\n", listaPreco.get(i));
 			System.out.println("o index desse produto eh: "+ i);
-			System.out.println("\n");
+			System.out.println();
 		}
 		
 		
@@ -109,6 +110,8 @@ public class Cardapio{
 		System.out.println("Digite o preco do produto: ");
 		Double price = sc.nextDouble();
 		listaPreco.add(price);
+		
+		System.out.println("Produto adicionado!");
 	}
 	
 	public static void editarProduto(Scanner sc) {
@@ -141,6 +144,7 @@ public class Cardapio{
 	}
 	
 	public static void removerProduto(Scanner sc) {
+		System.out.print("Digite o index do produto a ser excluido: ");
 		int index = sc.nextInt();
 		listaNomes.remove(index);
 		listaDescricao.remove(index);
