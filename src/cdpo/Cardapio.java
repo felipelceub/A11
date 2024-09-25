@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Cardapio{
 	static List<String> listaNomes = new ArrayList<>();
-	static List<String> listaDescricao = new ArrayList<>();
+	static List<String> listaCodigo = new ArrayList<>();
 	static List<Boolean> listaAtivo = new ArrayList<>();
 	static List<Double> listaPreco = new ArrayList<>();
 	
@@ -30,18 +30,18 @@ public class Cardapio{
 	
 	public static void getAllInfo() {
 		
+		System.out.println("-------------------------------------------------------------------------------------------------");
+        System.out.println("CÓDIGO PRODUTO                                                                              VALOR");
+        System.out.println("-------------------------------------------------------------------------------------------------");
+		
 		for(int i = 0; i < listaNomes.size(); i++) {
 			if(listaAtivo.get(i) == false) {
 				break;
 			}
-			System.out.println("Nome: "+ listaNomes.get(i));
-			System.out.println("Descricao do produto:\n"+ listaDescricao.get(i));
-			System.out.println("Produto disponivel?\n"+ listaAtivo.get(i));
-			System.out.printf("Preco do produto: R$%.2f\n", listaPreco.get(i));
-			System.out.println("o index desse produto eh: "+ i);
-			System.out.println();
+			System.out.printf("%-7s %-80s %6s\n", listaCodigo.get(i), listaNomes.get(i), listaPreco.get(i));
 		}
 		
+        System.out.println("-------------------------------------------------------------------------------------------------");
 		
 	}
 	
@@ -88,30 +88,46 @@ public class Cardapio{
 	
 	public static void cadastrarProduto(Scanner sc) {
 		sc.nextLine();
-		System.out.println("Digite o nome do produto: ");
-		String nome = sc.nextLine();
-
-		listaNomes.add(nome);
-		
-		System.out.println("Digite a descricao do produto: ");
-			String descricao = sc.nextLine();
-
-			listaDescricao.add(descricao);
-		System.out.println("O produto esta disponivel? 1 para sim, 2 para nao");
 	
-			int disponibilidade = sc.nextInt();
-			if(disponibilidade == 1) {
-				listaAtivo.add(true);
-			}
-			else {
-				listaAtivo.add(false);
-			}
+		String nome;
+		do {
+			System.out.println("digite o nome: ");
+				nome = sc.nextLine();
+		} while(nome.length() < 3 || nome.length() > 60);
 		
-		System.out.println("Digite o preco do produto: ");
-		Double price = sc.nextDouble();
+		String codigoProd;
+		do {
+			System.out.println("digite o codigo do produto: ");
+				codigoProd = sc.nextLine();
+		
+		} while(codigoProd.length() != 6);
+	
+		int disponibilidade;
+		do {
+			System.out.println("O produto esta disponivel? 1 para sim, 2 para nao");
+				disponibilidade = sc.nextInt();
+			
+		} while(disponibilidade != 1 || disponibilidade != 2);
+	
+		Double price;
+		do {
+		System.out.println("digite o preco: ");
+			price = sc.nextDouble();
+		
+		} while(price < 0);
+		
+		System.out.println("Item incluido com sucesso! ");
+		
+		listaNomes.add(nome);
+		listaCodigo.add(codigoProd);
+		if(disponibilidade == 1) {
+			listaAtivo.add(true);
+		}
+		else {
+			listaAtivo.add(false);
+		}
 		listaPreco.add(price);
-		
-		System.out.println("Produto adicionado!");
+	
 	}
 	
 	public static void editarProduto(Scanner sc) {
@@ -119,35 +135,53 @@ public class Cardapio{
 		System.out.println("digite o index para editar o as informacoes");
 		int index = sc.nextInt();
 		sc.nextLine();
-	System.out.println("digite o novo nome: ");
-		String nome = sc.nextLine();
-			listaNomes.set(index, nome);
 	
-	System.out.println("digite a nova descricao: ");
-		String descricao = sc.nextLine();
-			listaDescricao.set(index, descricao);
-	
-	System.out.println("O produto esta disponivel? 1 para sim, 2 para nao");
-		int disponibilidade = sc.nextInt();
-			if(disponibilidade == 1) {
-				listaAtivo.set(index, true);
-		}
-			else {
-				listaAtivo.set(index, false);
-			}
-	
-	System.out.println("digite o novo preco: ");
-		Double price = sc.nextDouble();
-		listaPreco.set(index, price);
+		String nome;
+		do {
+			System.out.println("digite o novo nome: ");
+				nome = sc.nextLine();
+		} while(nome.length() < 3 || nome.length() > 60);
 		
-	System.out.println("Item editado com sucesso! ");
+		String codigoProd;
+		do {
+			System.out.println("digite o novo codigo do produto: ");
+				codigoProd = sc.nextLine();
+		
+		} while(codigoProd.length() != 6);
+	
+		int disponibilidade;
+		do {
+			System.out.println("O produto esta disponivel? 1 para sim, 2 para nao");
+				disponibilidade = sc.nextInt();
+			
+		} while(disponibilidade != 1 || disponibilidade != 2);
+	
+		Double price;
+		do {
+		System.out.println("digite o novo preco: ");
+			price = sc.nextDouble();
+		
+		} while(price < 0);
+		
+		System.out.println("Item editado com sucesso! ");
+		
+		listaNomes.set(index, nome);
+		listaCodigo.set(index, codigoProd);
+		if(disponibilidade == 1) {
+			listaAtivo.set(index, true);
+		}
+		else {
+			listaAtivo.set(index, false);
+		}
+		listaPreco.set(index, price);
+	
 	}
 	
 	public static void removerProduto(Scanner sc) {
 		System.out.print("Digite o index do produto a ser excluido: ");
 		int index = sc.nextInt();
 		listaNomes.remove(index);
-		listaDescricao.remove(index);
+		listaCodigo.remove(index);
 		listaAtivo.remove(index);
 		listaPreco.remove(index);
 		System.out.println("removido com sucesso!");
